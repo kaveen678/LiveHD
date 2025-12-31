@@ -152,7 +152,7 @@
     const m3uUrl = "https://ayna.sm-monirulislam-exp.workers.dev/AYNA/ayna.m3u";
     const finalUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(m3uUrl);
     let allChannels = [];
-    let currentPlayingUrl = ""; 
+    let currentPlayingUrl = ""; // දැනට ප්ලේ වන චැනල් එකේ ලින්ක් එක මතක තබා ගැනීමට
 
     var player = new Clappr.Player({
         parentId: "#player",
@@ -209,12 +209,13 @@
             row.className = 'channel-row';
             row.innerText = ch.name;
             
+            // සර්ච් එක අයින් කරාට පස්සෙත් කලින් ප්ලේ වූ එක රතු පාටින් පෙන්වීමට
             if (ch.url === currentPlayingUrl) {
                 row.classList.add('active-ch');
             }
 
             row.onclick = function() {
-                currentPlayingUrl = ch.url; 
+                currentPlayingUrl = ch.url; // ප්ලේ කරන ලින්ක් එක සේව් කර ගනී
                 player.load(ch.url);
                 player.play();
                 document.querySelectorAll('.channel-row').forEach(r => r.classList.remove('active-ch'));
@@ -224,6 +225,7 @@
             
             listDiv.appendChild(row);
 
+            // මුල්ම වතාවේ පමණක් පළමු චැනල් එක ලෝඩ් කිරීමට
             if (currentPlayingUrl === "" && index === 0) {
                 currentPlayingUrl = ch.url;
                 player.load(ch.url);
